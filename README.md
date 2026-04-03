@@ -1,65 +1,63 @@
 # 🎓 Faculty of Computing & IT Management System
 
-A dynamic, full-stack web application designed for academic institutions. This portal serves as a digital bridge between the **Faculty of Computing and Information Technology** and its students, providing a streamlined experience for information access and content management.
+A robust, full-stack web platform designed to manage the academic and administrative operations of the **Faculty of Computing and Information Technology**. This project provides a dual-interface experience: a public-facing portal for students/visitors and a comprehensive management dashboard for administrators.
 
 ---
 
-## 🚀 Key Features
+## 🚀 Core Features
 
-* **Dynamic Academic Directory:** Displays faculty departments and programs fetched directly from the database.
-* **Integrated News System:** A dedicated section for the latest faculty updates and announcements.
-* **Role-Based Access Control (RBAC):**
-    * **Admin (مسؤول):** Full administrative privileges to add, update, and delete news, departments, and academic programs.
-    * **Student (طالب):** Access to personal profiles and college resources.
-* **Secure Authentication:** User registration and login system utilizing PHP sessions and `password_hash` for data security.
-* **Responsive UI:** A clean, modern interface styled with the **Cairo** Google Font and custom CSS, optimized for all devices.
-* **Contact & Interaction:** Built-in contact form for direct inquiries.
+### 🏢 Administrative Dashboard (Control Panel)
+* **Content Management (CRUD):** Authorized admins can fully manage (Create, Read, Update, Delete) the following:
+    * **Academic Programs:** Manage degrees and specializations via `insert_program.php` and `updateprogrames.php`.
+    * **Faculty News:** Publish and edit the latest announcements through `insert_news.php` and `update_news1.php`.
+    * **Departments:** Organize faculty divisions using `insert.php` and `update.php`.
+* **Centralized Management:** Tables like `News.php` and `programesA.php` provide a streamlined view for admins to monitor and modify data.
+
+### 🔐 Security & Authentication
+* **Role-Based Access Control (RBAC):** Distinct roles for **Admin (مسؤول)** and **Student (طالب)**.
+* **Session Management:** Secure session handling via `session_setup.php` with custom lifetime settings.
+* **Protected Routes:** Administrative pages are restricted; unauthorized users are automatically redirected to the homepage.
+* **Secure Login:** Integrated `login_process.php` with password verification and error handling.
+
+### 📱 User Experience
+* **Responsive Design:** A modern, mobile-friendly UI styled with the **Cairo** font family.
+* **Personal Profiles:** Dedicated `profile.php` for registered users.
+* **Bilingual Feel:** While the code is PHP-based, the interface is fully localized in Arabic for its target audience.
 
 ---
 
 ## 🛠️ Technical Stack
 
-* **Language:** PHP (Server-side logic)
-* **Database:** MySQL (Relational database management)
-* **Frontend:** HTML5, CSS3 (Custom styling & Flexbox)
-* **Environment:** Optimized for XAMPP / WAMP stacks.
+* **Backend:** PHP (Procedural with Prepared Statements for SQL safety).
+* **Database:** MySQL (Relational schema).
+* **Frontend:** HTML5, CSS3 (Custom Grid & Flexbox layouts).
+* **Server Environment:** XAMPP / WAMP (Apache Server).
 
 ---
 
-## 📂 Project Structure
+## 📂 Key File Map
 
-* `index.php` - Homepage featuring academic programs.
-* `department.php` - Academic departments listing and management.
-* `news.php` - Latest news and faculty updates feed.
-* `contact.php` - Centralized database connection configuration.
-* `style.css` - Custom styling using the "Cairo" typography.
-* `users.sql` - Complete database schema including tables for users and programs.
-* `delete.php` & `delete_news.php` - Administrative backend handlers for content removal.
-
----
-
-## 💻 Installation & Setup
-
-1.  **Environment:** Ensure you have **XAMPP** or a similar local server installed.
-2.  **Download:** Clone or download this repository into your `htdocs` folder.
-3.  **Database Setup:**
-    * Open **phpMyAdmin**.
-    * Create a new database named `unversity`.
-    * Import the `users.sql` file provided in the repository to create the necessary tables.
-4.  **Connection:** The system is pre-configured to connect to `localhost` with `root` (no password). Adjust `contact.php` if your local settings differ.
-5.  **Run:** Open your browser and go to `http://localhost/your-folder-name/index.php`.
+* `login.php` / `logout.php`: User authentication entry and exit points.
+* `insert_*.php`: Forms for adding new records to the database.
+* `update_*.php`: Dynamic forms for editing existing data.
+* `delete_*.php`: Backend logic for secure record removal.
+* `contact.php`: Database connection layer (using the `unversity` schema).
+* `style.css`: Global stylesheet for consistent branding and typography.
 
 ---
 
-## 🔐 Security Overview
+## 💻 Installation & Local Setup
 
-The project implements several security best practices:
-* **Prepared Statements:** To prevent SQL Injection attacks.
-* **Session Security:** Secure session management for user authentication.
-* **Password Encryption:** Utilizing modern hashing algorithms to protect user credentials.
+1.  **Server:** Download and install **XAMPP**.
+2.  **Files:** Place the project folder in the `C:/xampp/htdocs/` directory.
+3.  **Database:**
+    * Open **phpMyAdmin** (`localhost/phpmyadmin`).
+    * Create a database named **`unversity`**.
+    * Import the `users.sql` file.
+4.  **Launch:** Open your browser and visit: `http://localhost/[your-folder-name]/index.php`.
 
 ---
 
-## 📄 License
-
-This project is open-source and available for educational purposes.
+## 🔒 Security Implementation Notes
+* **SQL Injection Prevention:** The system utilizes `mysqli::prepare` and `bind_param` for data-heavy operations.
+* **Global Session Setup:** `session_setup.php` ensures consistent session parameters (86400s lifetime) across all pages.
